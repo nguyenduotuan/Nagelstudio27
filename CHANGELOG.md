@@ -4,6 +4,8 @@ Record every meaningful change to this project here. Add a newest-first entry fo
 
 ## Unreleased
 
+- Set `src/data/prices.json` to a valid empty array so the price list can remain empty without causing JSON parsing errors. Validation: JSON parse and `git diff --check`.
+- Updated DE/EN/VI About and booking copy to encourage calling for flexible, personal service; clarified that online requests are non-binding until confirmed and confirmed appointments are binding, with conditional lawful cancellation-cost wording. Validation: translation syntax, editor diagnostics, and `git diff --check`.
 - Added `docs/HOSTING.md` as an AI-readable deployment handoff covering runtime, persistent booking storage, secrets, HTTPS, proxy configuration, backups, and questions to resolve before choosing a host. Linked it from README. Validation: documentation review and `git diff --check`.
 - Removed hard-coded admin credentials from the server and historical changelog, and require `NAILSHOP_ADMIN_USER` and `NAILSHOP_ADMIN_PASSWORD` before startup. README updated with setup instructions. Validation: Python compile, missing-credential startup check, staged-content scan, and `git diff --check`.
 - Updated the booking success message in DE/EN/VI to say the appointment is pending and the owner will call to confirm it or discuss details. Validation: `node --check src/scripts/translations.js` and `git diff --check`.
