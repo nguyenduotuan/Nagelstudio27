@@ -1,0 +1,28 @@
+[
+  {
+    "title": { "de": "Maniküre", "en": "Manicure", "vi": "Làm móng tay" },
+    "items": [
+      {
+        "name": { "de": "Klassische Maniküre", "en": "Classic manicure", "vi": "Làm móng tay cơ bản" },
+        "price": "XX €"
+      },
+      {
+        "name": { "de": "Maniküre mit Lack", "en": "Manicure with polish", "vi": "Làm móng tay kèm sơn" },
+        "price": "XX €"
+      }
+    ]
+  },
+  {
+    "title": { "de": "Pediküre", "en": "Pedicure", "vi": "Làm móng chân" },
+    "items": [
+      {
+        "name": { "de": "Klassische Pediküre", "en": "Classic pedicure", "vi": "Làm móng chân cơ bản" },
+        "price": "XX €"
+      },
+      {
+        "name": { "de": "Pediküre mit Lack", "en": "Pedicure with polish", "vi": "Làm móng chân kèm sơn" },
+        "price": "XX €"
+      }
+    ]
+  }
+]

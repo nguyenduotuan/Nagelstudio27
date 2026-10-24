@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Nagelstudio 27 – Verwaltung</title>
+    <!-- Served at /admin, so asset paths must be absolute. -->
+    <link rel="stylesheet" href="/src/styles/main.css" />
+    <script type="module" src="/src/scripts/admin.js"></script>
+  </head>
+  <body>
+    <header class="site-header admin-header">
+      <a class="brand" href="/">Nagelstudio 27</a>
+      <nav aria-label="Verwaltung">
+        <button type="button" class="admin-tab" data-admin-tab="calendar" aria-selected="true">Kalendar</button>
+        <button type="button" class="admin-tab" data-admin-tab="bookings" aria-selected="false">Terminbuchungen</button>
+      </nav>
+    </header>
+
+    <main class="admin-main">
+      <section id="calendar-panel" class="section">
+        <div class="admin-calendar-toolbar">
+          <h1>Kalendar</h1>
+          <div class="admin-calendar-controls">
+            <div class="admin-view-toggle" role="group" aria-label="Kalenderansicht">
+              <button type="button" data-calendar-view="month" aria-pressed="true">Monat</button>
+              <button type="button" data-calendar-view="week" aria-pressed="false">Woche</button>
+            </div>
+            <div class="admin-month-controls">
+              <button type="button" id="previous-period" aria-label="Vorheriger Zeitraum">&#8592;</button>
+            <strong id="calendar-month"></strong>
+              <button type="button" id="next-period" aria-label="Nächster Zeitraum">&#8594;</button>
+            </div>
+          </div>
+        </div>
+        <p id="calendar-error" role="status"></p>
+        <div id="month-calendar">
+          <div id="calendar-grid" class="calendar-grid" aria-label="Monatskalender"></div>
+          <p id="selected-date" class="admin-selection" aria-live="polite">Datum auswählen, um Terminanfragen zu sehen.</p>
+        </div>
+        <div id="week-calendar" class="week-calendar" aria-label="Wochenkalender" hidden></div>
+      </section>
+
+      <section id="bookings-panel" class="section" hidden>
+        <div class="admin-calendar-toolbar">
+          <h1>Terminbuchungen</h1>
+          <button type="button" id="refresh-bookings" class="button button-secondary">Aktualisieren</button>
+        </div>
+        <p id="booking-error" role="status"></p>
+        <div class="booking-folder-tabs" role="group" aria-label="Terminbuchungen filtern">
+          <button type="button" data-booking-folder="pending" aria-pressed="true">Ausstehend <span data-booking-count="pending">0</span></button>
+          <button type="button" data-booking-folder="accepted" aria-pressed="false">Akzeptiert <span data-booking-count="accepted">0</span></button>
+        </div>
+        <div id="booking-list" class="admin-booking-list" aria-live="polite">Buchungen werden geladen …</div>
+      </section>
+    </main>
+
+    <dialog id="booking-dialog" class="booking-dialog" aria-labelledby="booking-dialog-title">
+      <div class="booking-dialog-header">
+        <h2 id="booking-dialog-title">Terminbuchung</h2>
+        <button type="button" id="booking-dialog-close" class="booking-dialog-close" aria-label="Schließen">&times;</button>
+      </div>
+      <div id="booking-dialog-body"></div>
+    </dialog>
+
+    <dialog id="delete-booking-dialog" class="booking-dialog" aria-labelledby="delete-booking-title">
+      <div class="booking-dialog-header">
+        <h2 id="delete-booking-title">Terminbuchung löschen?</h2>
+      </div>
+      <form id="delete-booking-form">
+        <p>Zum Ablehnen und endgültigen Löschen bitte <strong>loeschen</strong> eingeben.</p>
+        <label for="delete-confirmation">Bestätigung</label>
+        <input id="delete-confirmation" type="text" autocomplete="off" required />
+        <p id="delete-booking-error" role="status"></p>
+        <div class="delete-dialog-actions">
+          <button type="button" id="delete-booking-cancel" class="button button-secondary">Abbrechen</button>
+          <button type="submit" id="delete-booking-submit" class="button button-danger" disabled>Löschen</button>
+        </div>
+      </form>
+    </dialog>
+  </body>
+</html>

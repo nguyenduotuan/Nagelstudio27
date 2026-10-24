@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nagelstudio 27 – Preisliste</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <script type="module" src="../scripts/prices.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../../index.html" data-shop="name"></a>
+      <nav aria-label="Main">
+        <a href="../../index.html" data-i18n="nav.home">Startseite</a>
+        <a href="prices.html" data-i18n="nav.prices">Preisliste</a>
+        <a href="contact.html" data-i18n="nav.contact">Kontakt</a>
+      </nav>
+      <div class="languages" role="group" aria-label="Language">
+        <button type="button" data-language="de">DE</button>
+        <button type="button" data-language="en">EN</button>
+        <button type="button" data-language="vi">VI</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="section narrow">
+        <h1 data-i18n="nav.prices"></h1>
+        <div id="price-list" class="prices"></div>
+      </section>
+    </main>
+  </body>
+</html>

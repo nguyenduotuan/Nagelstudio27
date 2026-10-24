@@ -1,0 +1,28 @@
+# Dependencies and build output
+node_modules/
+dist/
+build/
+.next/
+.vite/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Operating system and editor files
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# Customer booking requests (personal data)
+data-private/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*

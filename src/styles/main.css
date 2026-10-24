@@ -1,0 +1,1354 @@
+:root {
+  --cream: #fcf9f4;
+  --blush: #efe5dd;
+  --ink: #302f2a;
+  --muted: #736d65;
+  --gold: #b3925d;
+  --gold-dark: #8c7044;
+  --forest: #2e443a;
+  --line: #ded4c9;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Everything is sized in rem, so this scales the whole page proportionally. */
+@media (min-width: 1280px) {
+  html {
+    font-size: 112.5%;
+  }
+}
+
+@media (min-width: 1680px) {
+  html {
+    font-size: 125%;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: "DM Sans", "Avenir Next", sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.75;
+}
+
+h1,
+h2 {
+  font-weight: normal;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  line-height: 1.08;
+}
+
+h1 {
+  font-size: 4rem;
+}
+
+h2 {
+  margin: 0 0 1.5rem;
+  font-size: 2.5rem;
+  color: var(--gold-dark);
+}
+
+a {
+  color: inherit;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.8rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Entrance animations are CSS-only and end fully visible, so content can never stay hidden. */
+main > .section {
+  animation: rise-in 600ms ease-out both;
+}
+
+.hero h1 {
+  animation: rise-in 650ms 80ms both;
+}
+
+.hero p {
+  animation: rise-in 650ms 180ms both;
+}
+
+.hero .button {
+  animation: rise-in 650ms 280ms both;
+}
+
+/* Header */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 2.5rem;
+  padding: 1.25rem 3.5rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--cream);
+}
+
+.brand {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 2rem;
+  letter-spacing: 0;
+  text-decoration: none;
+}
+
+.site-header nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  font-size: 1rem;
+}
+
+.site-header nav a {
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.site-header nav a:hover {
+  color: var(--gold-dark);
+}
+
+.languages button {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--gold);
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.languages button[aria-pressed="true"] {
+  background: var(--gold);
+  color: #fff;
+}
+
+.languages button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.languages button::before {
+  content: "";
+  width: 1.3rem;
+  height: 0.9rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-position: center;
+  background-size: cover;
+}
+
+.languages button[data-language="de"]::before {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 5 3'><rect width='5' height='1' fill='%23000'/><rect y='1' width='5' height='1' fill='%23d00'/><rect y='2' width='5' height='1' fill='%23ffce00'/></svg>");
+}
+
+.languages button[data-language="en"]::before {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 30'><clipPath id='t'><path d='M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z'/></clipPath><rect width='60' height='30' fill='%23012169'/><path d='M0,0 L60,30 M60,0 L0,30' stroke='%23fff' stroke-width='6'/><path d='M0,0 L60,30 M60,0 L0,30' clip-path='url(%23t)' stroke='%23c8102e' stroke-width='4'/><path d='M30,0 v30 M0,15 h60' stroke='%23fff' stroke-width='10'/><path d='M30,0 v30 M0,15 h60' stroke='%23c8102e' stroke-width='6'/></svg>");
+}
+
+.languages button[data-language="vi"]::before {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 20'><rect width='30' height='20' fill='%23da251d'/><polygon fill='%23ff0' points='15,4.2 16.46,8.7 21.18,8.69 17.36,11.47 18.82,15.96 15,13.18 11.18,15.96 12.64,11.47 8.82,8.69 13.54,8.7'/></svg>");
+}
+
+/* Layout */
+.hero {
+  padding: 8rem 2rem;
+  background: var(--forest);
+  color: var(--cream);
+  text-align: center;
+}
+
+.hero h1 {
+  max-width: 58rem;
+  margin: 0 auto 1.25rem;
+}
+
+.hero p {
+  max-width: 42rem;
+  margin: 0 auto 2.5rem;
+  color: #e1ded4;
+}
+
+.section {
+  width: 100%;
+  max-width: 80rem;
+  padding: 5.5rem 4rem;
+  margin: 0 auto;
+}
+
+.section.narrow {
+  max-width: 54rem;
+}
+
+.section-tinted {
+  max-width: none;
+  background: var(--blush);
+}
+
+.section-tinted > * {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.empty,
+.hint {
+  color: var(--muted);
+}
+
+.address {
+  white-space: pre-line;
+}
+
+.contact-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+
+.contact-hours {
+  padding-left: 4rem;
+  border-left: 1px solid var(--line);
+}
+
+.hours {
+  max-width: 17rem;
+  margin: 0;
+  padding: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  list-style: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.hours li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.15rem 0;
+}
+
+.hours li.closed {
+  color: var(--muted);
+}
+
+.about-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: center;
+  gap: 4rem;
+}
+
+.about-row h2 {
+  margin: 0;
+}
+
+.about {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.home h2 {
+  font-size: 3rem;
+  letter-spacing: 0.01em;
+}
+
+.home h2::after {
+  content: "";
+  display: block;
+  width: 3.5rem;
+  height: 2px;
+  margin-top: 0.9rem;
+  background: var(--gold);
+}
+
+.home .section > h2 {
+  margin-bottom: 2.25rem;
+}
+
+/* Buttons */
+.button {
+  display: inline-block;
+  padding: 0.9rem 2rem;
+  border: 1px solid var(--gold);
+  background: var(--gold);
+  color: #fff;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.button:hover {
+  background: var(--gold-dark);
+  transform: translateY(-1px);
+}
+
+.button-secondary {
+  background: transparent;
+  color: var(--gold-dark);
+}
+
+.button-secondary:hover {
+  background: var(--blush);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+/* Gallery and reviews */
+.gallery-banner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  min-height: 26rem;
+  padding: 4rem 2rem;
+  border: 0;
+  overflow: hidden;
+  background-color: var(--forest);
+  color: var(--cream);
+  font: inherit;
+  cursor: pointer;
+}
+
+.gallery-banner::before,
+.gallery-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.gallery-banner::before {
+  background-image: var(--cover, none);
+  background-position: center;
+  background-size: cover;
+  transition: transform 600ms ease;
+}
+
+.gallery-banner::after {
+  background: rgba(20, 16, 12, 0.6);
+  transition: opacity 300ms ease;
+}
+
+.gallery-banner:hover::before {
+  transform: scale(1.04);
+}
+
+.gallery-banner:hover::after {
+  opacity: 0.7;
+}
+
+.gallery-banner > span {
+  position: relative;
+  z-index: 1;
+}
+
+.gallery-banner-title {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 4rem;
+  line-height: 1.08;
+  color: var(--cream);
+  text-shadow: 0 2px 1.5rem rgba(0, 0, 0, 0.4);
+}
+
+.gallery-banner-title::after {
+  content: "";
+  display: block;
+  width: 3.5rem;
+  height: 2px;
+  margin: 0.9rem auto 0;
+  background: var(--gold);
+}
+
+.gallery-banner-hint {
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(252, 249, 244, 0.85);
+}
+
+.gallery-banner:hover .gallery-banner-hint {
+  color: #fff;
+}
+
+.gallery-dialog {
+  width: min(72rem, 94vw);
+  max-height: 90vh;
+  padding: 0;
+  border: 0;
+  background: var(--cream);
+  color: var(--ink);
+  overflow: auto;
+}
+
+.gallery-dialog[open],
+.booking-dialog[open] {
+  animation: dialog-in 180ms ease-out both;
+}
+
+.gallery-dialog[open]::backdrop,
+.booking-dialog[open]::backdrop {
+  animation: backdrop-in 180ms ease-out both;
+}
+
+@keyframes backdrop-in {
+  from { background-color: rgba(30, 25, 20, 0); }
+  to { background-color: rgba(30, 25, 20, 0.65); }
+}
+
+.gallery-dialog::backdrop {
+  background: rgba(30, 25, 20, 0.75);
+}
+
+.gallery-close {
+  position: sticky;
+  top: 0.75rem;
+  z-index: 1;
+  display: block;
+  width: 3rem;
+  height: 3rem;
+  margin: 0.75rem 0.75rem 0 auto;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  background: var(--cream);
+  color: var(--gold-dark);
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.gallery-close:hover {
+  background: var(--gold);
+  color: #fff;
+}
+
+.gallery-dialog .gallery {
+  padding: 0 2rem 2rem;
+}
+
+.gallery-empty {
+  margin: 0;
+  padding: 3rem 2rem 4rem;
+  text-align: center;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+body:has(dialog[open]) {
+  overflow: hidden;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 1.25rem;
+}
+
+.gallery img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.reviews-slider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.reviews-slider[hidden] {
+  display: none;
+}
+
+.reviews {
+  display: flex;
+  flex: 1;
+  gap: 1.75rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-color: var(--gold) transparent;
+  scrollbar-width: thin;
+}
+
+.slider-button {
+  flex: none;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  background: var(--cream);
+  color: var(--gold-dark);
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.slider-button:hover {
+  background: var(--gold);
+  color: #fff;
+}
+
+.reviews blockquote {
+  flex: 0 0 min(26rem, 85%);
+  margin: 0;
+  scroll-snap-align: start;
+  padding: 1rem 1.5rem;
+  font-style: italic;
+}
+
+.review-text {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+}
+
+.review-text.is-expanded {
+  display: block;
+  overflow: visible;
+}
+
+.review-more {
+  margin: 0.5rem 0 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--gold-dark);
+  font: inherit;
+  font-style: normal;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.review-more[hidden] {
+  display: none;
+}
+
+.review-stars {
+  display: block;
+  margin-bottom: 0.75rem;
+  color: var(--gold);
+  font-style: normal;
+  letter-spacing: 0.2em;
+}
+
+.reviews footer {
+  font-style: normal;
+  color: var(--gold-dark);
+  margin-top: 1rem;
+}
+
+/* Price list */
+.prices ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.prices li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+/* Booking form */
+.form {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.form input,
+.form textarea {
+  padding: 0.9rem 1rem;
+  border: 1px solid #bdb3a9;
+  border-radius: 2px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+}
+
+.form input[type="date"],
+.form input[type="time"] {
+  width: 100%;
+}
+
+.booking-datetime {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.booking-field {
+  display: grid;
+  min-width: 0;
+  gap: 0.75rem;
+}
+
+.form label {
+  margin-top: 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.form textarea {
+  resize: vertical;
+}
+
+.booking-honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.form .button {
+  justify-self: start;
+  margin-top: 1.25rem;
+}
+
+/* Admin */
+.admin-header {
+  min-height: 5.5rem;
+}
+
+.admin-header nav {
+  align-self: stretch;
+  align-items: center;
+}
+
+.admin-tab {
+  height: 100%;
+  padding: 0.4rem 0.25rem;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.admin-tab[aria-selected="true"] {
+  border-bottom-color: var(--gold-dark);
+  color: var(--ink);
+}
+
+.admin-main .section {
+  max-width: 76rem;
+}
+
+.admin-calendar-toolbar,
+.admin-month-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.admin-calendar-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem 1.5rem;
+}
+
+.admin-view-toggle {
+  display: inline-flex;
+  border: 1px solid var(--line);
+}
+
+.admin-view-toggle button {
+  padding: 0.45rem 0.9rem;
+  border: 0;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.admin-view-toggle button + button {
+  border-left: 1px solid var(--line);
+}
+
+.admin-view-toggle button[aria-pressed="true"] {
+  background: var(--forest);
+  color: #fff;
+}
+
+.admin-calendar-toolbar h1 {
+  margin: 0;
+  font-size: 3rem;
+}
+
+.admin-month-controls button {
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+}
+
+.admin-month-controls strong {
+  min-width: 11rem;
+  text-align: center;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  max-width: 56rem;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.calendar-weekday,
+.calendar-day {
+  min-width: 0;
+  aspect-ratio: 1.65;
+  border: 0;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.calendar-weekday {
+  display: grid;
+  place-items: center;
+  background: var(--blush);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.calendar-day {
+  position: relative;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+  transition: background-color 140ms ease, color 140ms ease;
+}
+
+.calendar-day:hover {
+  background: var(--blush);
+}
+
+.calendar-day.has-bookings {
+  background: #e4eee6;
+  color: var(--forest);
+  font-weight: 600;
+}
+
+.calendar-day.has-bookings::after {
+  content: attr(data-count);
+  position: absolute;
+  right: 0.3rem;
+  bottom: 0.2rem;
+  display: grid;
+  width: 1.3rem;
+  height: 1.3rem;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--forest);
+  color: white;
+  font-size: 0.75rem;
+}
+
+.admin-selection {
+  min-height: 1.75rem;
+  color: var(--muted);
+}
+
+.week-calendar {
+  display: grid;
+  grid-template-columns: 3.5rem repeat(7, minmax(6.5rem, 1fr));
+  max-width: 64rem;
+  overflow-x: auto;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+  font-size: 0.85rem;
+  line-height: 1.35;
+}
+
+.week-calendar[hidden] {
+  display: none;
+}
+
+.timetable-corner,
+.timetable-day-heading,
+.timetable-hour,
+.timetable-cell,
+.timetable-all-day-label,
+.timetable-all-day-cell {
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.timetable-corner,
+.timetable-day-heading {
+  background: var(--blush);
+}
+
+.timetable-day-heading {
+  display: grid;
+  justify-items: center;
+  padding: 0.5rem 0.25rem;
+}
+
+.timetable-day-heading span {
+  color: var(--muted);
+}
+
+.timetable-day-heading.today {
+  background: var(--forest);
+  color: #fff;
+}
+
+.timetable-day-heading.today span {
+  color: #e1ded4;
+}
+
+.timetable-all-day-label {
+  padding: 0.35rem 0.25rem;
+  background: var(--blush);
+  color: var(--muted);
+  font-size: 0.75rem;
+  text-align: right;
+}
+
+.timetable-all-day-cell {
+  display: grid;
+  align-content: start;
+  gap: 0.25rem;
+  min-height: 2.5rem;
+  padding: 0.2rem;
+  background: #fbf7ef;
+}
+
+.timetable-booking-all-day {
+  border-left-color: var(--gold-dark);
+  background: #f3ead9;
+  color: var(--ink);
+}
+
+.timetable-hour {
+  padding: 0.35rem 0.4rem;
+  background: var(--cream);
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.timetable-cell {
+  display: grid;
+  align-content: start;
+  gap: 0.25rem;
+  min-height: 3.25rem;
+  padding: 0.25rem;
+  background: #fff;
+}
+
+.timetable-cell.today {
+  background: #fbf7ef;
+}
+
+.timetable-booking {
+  display: grid;
+  width: 100%;
+  padding: 0.3rem 0.45rem;
+  border: 0;
+  border-left: 3px solid var(--forest);
+  background: #e4eee6;
+  color: var(--forest);
+  font: inherit;
+  text-align: left;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+  transition: background-color 140ms ease, transform 140ms ease;
+}
+
+.timetable-booking:hover {
+  background: #d3e4d7;
+  transform: translateY(-1px);
+}
+
+.booking-dialog {
+  width: min(36rem, 94vw);
+  max-height: 90vh;
+  padding: 1.5rem;
+  border: 0;
+  background: var(--cream);
+  color: var(--ink);
+}
+
+.booking-dialog::backdrop {
+  background: rgba(30, 25, 20, 0.6);
+}
+
+.booking-dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.booking-dialog-header h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.booking-dialog-close {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--gold-dark);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 140ms ease, color 140ms ease;
+}
+
+.booking-dialog-close:hover {
+  background: var(--gold);
+  color: #fff;
+}
+
+.booking-dialog .admin-booking-details {
+  grid-template-columns: 1fr;
+  gap: 0.9rem;
+}
+
+#delete-booking-form > label {
+  display: block;
+  margin: 0.75rem 0 0.35rem;
+  font-size: 0.9rem;
+}
+
+#delete-confirmation {
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+}
+
+.delete-dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.button-danger {
+  border-color: #a43b35;
+  background: #a43b35;
+}
+
+.button-danger:hover {
+  border-color: #812c28;
+  background: #812c28;
+}
+
+.button-danger:disabled {
+  border-color: #b9a8a4;
+  background: #b9a8a4;
+  cursor: not-allowed;
+}
+
+.timetable-booking strong {
+  font-variant-numeric: tabular-nums;
+}
+
+.admin-booking-list {
+  max-width: 58rem;
+}
+
+.booking-folder-tabs {
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+  margin: 1.25rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.booking-folder-tabs button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  cursor: pointer;
+}
+
+.booking-folder-tabs button[aria-pressed="true"] {
+  border-bottom-color: var(--gold-dark);
+  color: var(--ink);
+}
+
+.booking-folder-tabs span {
+  min-width: 1.5rem;
+  padding: 0 0.25rem;
+  background: var(--blush);
+  color: var(--ink);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.admin-booking {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.admin-booking-header,
+.admin-booking-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.admin-booking-actions {
+  justify-content: flex-end;
+}
+
+.booking-action {
+  display: grid;
+  width: 2.4rem;
+  height: 2.4rem;
+  place-items: center;
+  border: 1px solid currentColor;
+  background: transparent;
+  font: inherit;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 140ms ease, color 140ms ease;
+}
+
+.booking-action-accept,
+.booking-status-accepted {
+  color: #286644;
+}
+
+.booking-action-accept:hover {
+  background: #e4eee6;
+}
+
+.booking-action-delete {
+  color: #a43b35;
+}
+
+.booking-action-delete:hover {
+  background: #f6e6e3;
+}
+
+.booking-status-accepted {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.admin-booking h2 {
+  margin: 0 0 0.25rem;
+  color: var(--ink);
+  font-family: "DM Sans", "Avenir Next", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.admin-booking-details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem 1.5rem;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.admin-booking-details dt {
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.admin-booking-details dd {
+  margin: 0.1rem 0 0;
+  overflow-wrap: anywhere;
+}
+
+.admin-booking-details a {
+  color: var(--muted);
+}
+
+.admin-booking-request {
+  grid-column: 1 / -1;
+}
+
+.admin-booking-request dd {
+  white-space: pre-wrap;
+}
+
+:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* Compact header: name and languages on one line, tabs below. */
+@media (max-width: 900px) {
+  .site-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.6rem 1rem;
+    padding: 0.8rem 1.25rem;
+  }
+
+  .brand {
+    overflow: hidden;
+    font-size: clamp(1.25rem, 5.5vw, 1.8rem);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .site-header nav {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-content: space-between;
+    gap: 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  .languages {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  .languages button {
+    gap: 0.3rem;
+    padding: 0.15rem 0.4rem;
+    font-size: 0.72rem;
+  }
+
+  .languages button::before {
+    width: 1rem;
+    height: 0.7rem;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 1rem;
+  }
+
+  h1 {
+    font-size: 2.75rem;
+  }
+
+  h2 {
+    font-size: 2.1rem;
+  }
+
+  .hero {
+    padding: 5rem 1.25rem;
+  }
+
+  .hero p {
+    margin-bottom: 2rem;
+  }
+
+  .section,
+  .section.narrow {
+    padding: 3.75rem 1.25rem;
+  }
+
+  .admin-calendar-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-calendar-controls {
+    width: 100%;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .admin-month-controls {
+    gap: 0.5rem;
+  }
+
+  .admin-month-controls strong {
+    min-width: auto;
+    font-size: 0.9rem;
+  }
+
+  .week-calendar {
+    grid-template-columns: 2.15rem repeat(7, minmax(0, 1fr));
+    overflow-x: hidden;
+    font-size: 0.62rem;
+  }
+
+  .timetable-day-heading {
+    padding: 0.35rem 0.05rem;
+    font-size: 0.62rem;
+  }
+
+  .timetable-hour {
+    padding: 0.25rem 0.1rem;
+    font-size: 0.58rem;
+  }
+
+  .timetable-all-day-label {
+    padding: 0.25rem 0.08rem;
+    font-size: 0.5rem;
+    overflow-wrap: anywhere;
+  }
+
+  .timetable-all-day-cell {
+    min-width: 0;
+    padding: 0.08rem;
+  }
+
+  .timetable-cell {
+    min-width: 0;
+    min-height: 2.8rem;
+    padding: 0.1rem;
+  }
+
+  .timetable-booking {
+    min-width: 0;
+    padding: 0.12rem 0.08rem;
+    border-left-width: 2px;
+    font-size: 0.55rem;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+    gap: 0.75rem;
+  }
+
+  .reviews {
+    gap: 1rem;
+  }
+
+  .slider-button {
+    display: none;
+  }
+
+  .gallery-banner {
+    min-height: 18rem;
+    padding: 3rem 1.25rem;
+  }
+
+  .gallery-banner-title {
+    font-size: 2.75rem;
+  }
+
+  .gallery-dialog .gallery {
+    padding: 0 1rem 1rem;
+  }
+
+  .about-row {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .contact-split {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .contact-hours {
+    padding-top: 2.5rem;
+    padding-left: 0;
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
+
+  .home h2 {
+    font-size: 2.4rem;
+  }
+
+  .button {
+    padding: 0.8rem 1.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .site-header nav {
+    gap: 0.8rem;
+  }
+
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+}
