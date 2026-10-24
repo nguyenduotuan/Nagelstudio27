@@ -44,6 +44,8 @@ There is nothing to build: no compiler, bundler or package install is needed. Bo
 
 To publish, upload `index.html`, `server.py`, `src/` and `public/`, keeping the folder layout unchanged because the pages use relative paths. `docs/`, `.github/` and the Markdown files do not need to be uploaded. Keep `data-private/` on the server and back it up.
 
+For the deployment requirements and context to give an AI hosting helper, see [docs/HOSTING.md](docs/HOSTING.md). Choose a host that supports a persistent Python process and writable persistent storage; static-only hosting is not sufficient.
+
 ## Project Structure
 
 ```text
