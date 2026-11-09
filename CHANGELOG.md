@@ -4,6 +4,9 @@ Record every meaningful change to this project here. Add a newest-first entry fo
 
 ## Unreleased
 
+- Added a German-first `Startseiten-Hinweis` admin tab to save, publish, hide, or clear a homepage announcement. Published notices appear in a prominent display-serif section below the hero; drafts stay private in `data-private/announcement.json`. Validation: Python and JavaScript syntax checks, translation key parity, and `git diff --check`.
+- Rewrote the DE/EN/VI About copy to introduce the woman behind the studio, highlighting nearly 20 years of nail-care experience, varied treatments and custom design requests. Validation: translation syntax, JSON data parse, and `git diff --check`.
+- Updated the DE/EN/VI booking success notice to say that if the owner has not called within three days, the appointment is not confirmed and the customer should call. Validation: translation syntax and `git diff --check`.
 - Set `src/data/prices.json` to a valid empty array so the price list can remain empty without causing JSON parsing errors. Validation: JSON parse and `git diff --check`.
 - Updated DE/EN/VI About and booking copy to encourage calling for flexible, personal service; clarified that online requests are non-binding until confirmed and confirmed appointments are binding, with conditional lawful cancellation-cost wording. Validation: translation syntax, editor diagnostics, and `git diff --check`.
 - Added `docs/HOSTING.md` as an AI-readable deployment handoff covering runtime, persistent booking storage, secrets, HTTPS, proxy configuration, backups, and questions to resolve before choosing a host. Linked it from README. Validation: documentation review and `git diff --check`.

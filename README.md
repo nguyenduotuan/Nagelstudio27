@@ -35,6 +35,7 @@ Connect both devices to the same trusted Wi-Fi or local network, start the serve
 - The form includes a honeypot and limits each client IP to 10 submissions per hour (in-memory; resets when the server restarts). When running behind a reverse proxy, pass its address with `--trusted-proxy <proxy-ip>` and configure the proxy to set `X-Forwarded-For`; only explicitly trusted addresses are used to determine client IPs.
 - Before changing bookings, the server creates one compressed pre-change backup per UTC day in `data-private/backups/` and removes backups older than 30 days. Backups are on the same machine by default; copy them to a separate disk or host for protection against machine failure. The directory is not served.
 - `/admin` opens the German-only calendar and bookings tabs behind HTTP Basic Auth. Pending requests can be accepted or deleted after typing `loeschen`; authentication uses the `NAILSHOP_ADMIN_USER` and `NAILSHOP_ADMIN_PASSWORD` environment variables.
+- The admin's `Startseiten-Hinweis` tab saves a German announcement draft, publishes it beneath the homepage hero, or clears it. The published notice is stored in `data-private/announcement.json` and is the only version exposed to homepage visitors.
 - The server only serves `index.html`, `src/` and `public/`; `server.py`, `data-private/`, `docs/` and `.git` are not reachable.
 - Before going live, serve the site over HTTPS (for example behind Caddy or nginx), otherwise the admin password and form data travel unencrypted.
 

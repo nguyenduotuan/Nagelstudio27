@@ -20,6 +20,7 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parent
 BOOKINGS_FILE = ROOT / "data-private" / "bookings.jsonl"
+ANNOUNCEMENT_FILE = ROOT / "data-private" / "announcement.json"
 BACKUP_DIR = ROOT / "data-private" / "backups"
 
 ADMIN_USER = os.environ.get("NAILSHOP_ADMIN_USER")
@@ -29,6 +30,7 @@ ADMIN_PAGE = "/src/pages/admin.html"
 # Everything else (server.py, data-private/, .git, docs/) is never served.
 PUBLIC_PREFIXES = ("/src/", "/public/")
 MAX_BODY_BYTES = 10_000
+ANNOUNCEMENT_LIMIT = 1000
 FIELD_LIMITS = {"name": 100, "phone": 50, "phoneConfirmation": 50, "request": 2000, "appointmentDate": 10}
 LANGUAGES = ("de", "en", "vi")
 BOOKING_STATUSES = ("pending", "accepted")
@@ -136,6 +138,7 @@ class Handler(SimpleHTTPRequestHandler):
         body = json.dumps(payload).encode()
         self.send_response(status)
         self.send_header("Content-Type", "application/json")
+        self.send_header("Cache-Control", "no-store")
         self.send_header("Content-Length", str(len(body)))
         self.end_headers()
         self.wfile.write(body)
@@ -160,6 +163,23 @@ class Handler(SimpleHTTPRequestHandler):
             self.send_json(400, {"error": "invalid_json"})
             return None
         return data
+
+    def read_announcement(self):
+        if not ANNOUNCEMENT_FILE.exists():
+            return {"text": "", "active": False}
+        with ANNOUNCEMENT_FILE.open(encoding="utf-8") as file:
+            announcement = json.load(file)
+        return {
+            "text": announcement.get("text", ""),
+            "active": announcement.get("active", False),
+        }
+
+    def write_announcement(self, announcement):
+        ANNOUNCEMENT_FILE.parent.mkdir(exist_ok=True)
+        temp_file = ANNOUNCEMENT_FILE.with_name("announcement.json.tmp")
+        with temp_file.open("w", encoding="utf-8") as file:
+            json.dump(announcement, file, ensure_ascii=False)
+        temp_file.replace(ANNOUNCEMENT_FILE)
 
     def booking_id_from_path(self):
         prefix = "/api/bookings/"
@@ -191,7 +211,21 @@ class Handler(SimpleHTTPRequestHandler):
         return False
 
     def do_GET(self):
-        if urlsplit(self.path).path == "/api/bookings":
+        path = urlsplit(self.path).path
+        if path == "/api/announcement":
+            with write_lock:
+                announcement = self.read_announcement()
+            self.send_json(200, {"text": announcement["text"] if announcement["active"] else ""})
+            return
+        if path == "/api/admin/announcement":
+            if not self.is_admin():
+                self.send_json(401, {"error": "unauthorized"})
+                return
+            with write_lock:
+                announcement = self.read_announcement()
+            self.send_json(200, announcement)
+            return
+        if path == "/api/bookings":
             if not self.is_admin():
                 self.send_json(401, {"error": "unauthorized"})
                 return
@@ -276,6 +310,26 @@ class Handler(SimpleHTTPRequestHandler):
             with BOOKINGS_FILE.open("a", encoding="utf-8") as file:
                 file.write(json.dumps(record, ensure_ascii=False) + "\n")
         self.send_json(201, {"ok": True})
+
+    def do_PUT(self):
+        if urlsplit(self.path).path != "/api/admin/announcement":
+            self.send_error(404)
+            return
+        if not self.is_admin():
+            self.send_json(401, {"error": "unauthorized"})
+            return
+        data = self.read_json_body()
+        if data is None:
+            return
+        text = data.get("text")
+        active = data.get("active")
+        if not isinstance(text, str) or len(text) > ANNOUNCEMENT_LIMIT or not isinstance(active, bool):
+            self.send_json(400, {"error": "invalid_announcement"})
+            return
+        announcement = {"text": text.strip(), "active": active and bool(text.strip())}
+        with write_lock:
+            self.write_announcement(announcement)
+        self.send_json(200, announcement)
 
     def do_PATCH(self):
         if not self.is_admin():

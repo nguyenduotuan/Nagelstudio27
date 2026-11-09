@@ -1,5 +1,10 @@
 const calendarPanel = document.getElementById("calendar-panel");
 const bookingsPanel = document.getElementById("bookings-panel");
+const announcementPanel = document.getElementById("announcement-panel");
+const announcementForm = document.getElementById("announcement-form");
+const announcementInput = document.getElementById("announcement-input");
+const announcementActive = document.getElementById("announcement-active");
+const announcementStatus = document.getElementById("announcement-status");
 const monthCalendar = document.getElementById("month-calendar");
 const weekCalendar = document.getElementById("week-calendar");
 const calendarGrid = document.getElementById("calendar-grid");
@@ -316,15 +321,63 @@ async function loadBookings() {
   renderCalendar();
 }
 
+async function loadAnnouncement() {
+  const response = await fetch("/api/admin/announcement", { cache: "no-store" });
+  if (!response.ok) throw new Error("Hinweis konnte nicht geladen werden.");
+  const announcement = await response.json();
+  announcementInput.value = announcement.text;
+  announcementActive.checked = announcement.active;
+}
+
+async function saveAnnouncement(text, active) {
+  announcementStatus.textContent = "";
+  const response = await fetch("/api/admin/announcement", {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ text, active }),
+  });
+  if (!response.ok) throw new Error("Hinweis konnte nicht gespeichert werden.");
+  const announcement = await response.json();
+  announcementInput.value = announcement.text;
+  announcementActive.checked = announcement.active;
+  announcementStatus.textContent = announcement.active
+    ? "Hinweis gespeichert und auf der Startseite veröffentlicht."
+    : announcement.text
+      ? "Entwurf gespeichert. Der Hinweis ist auf der Startseite ausgeblendet."
+      : "Hinweis gelöscht.";
+}
+
 document.querySelectorAll("[data-admin-tab]").forEach((tab) => {
   tab.addEventListener("click", () => {
-    const showCalendar = tab.dataset.adminTab === "calendar";
+    const activePanel = {
+      calendar: calendarPanel,
+      bookings: bookingsPanel,
+      announcement: announcementPanel,
+    }[tab.dataset.adminTab];
     document.querySelectorAll("[data-admin-tab]").forEach((item) => {
       item.setAttribute("aria-selected", String(item === tab));
     });
-    calendarPanel.hidden = !showCalendar;
-    bookingsPanel.hidden = showCalendar;
+    [calendarPanel, bookingsPanel, announcementPanel].forEach((panel) => {
+      panel.hidden = panel !== activePanel;
+    });
   });
+});
+
+announcementForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  try {
+    await saveAnnouncement(announcementInput.value, announcementActive.checked);
+  } catch (error) {
+    announcementStatus.textContent = error.message;
+  }
+});
+
+document.getElementById("announcement-clear").addEventListener("click", async () => {
+  try {
+    await saveAnnouncement("", false);
+  } catch (error) {
+    announcementStatus.textContent = error.message;
+  }
 });
 
 document.querySelectorAll("[data-calendar-view]").forEach((button) => {
@@ -396,6 +449,9 @@ document.getElementById("refresh-bookings").addEventListener("click", async () =
 });
 
 renderCalendar();
+loadAnnouncement().catch((error) => {
+  announcementStatus.textContent = error.message;
+});
 loadBookings().catch((error) => {
   calendarError.textContent = error.message;
   bookingError.textContent = error.message;

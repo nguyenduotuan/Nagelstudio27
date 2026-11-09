@@ -9,13 +9,16 @@
     <link rel="stylesheet" href="/src/styles/main.css" />
     <script type="module" src="/src/scripts/admin.js"></script>
   </head>
-  <body>
+  <body class="admin-page">
     <header class="site-header admin-header">
+      <div class="header-inner">
       <a class="brand" href="/">Nagelstudio 27</a>
-      <nav aria-label="Verwaltung">
+      <nav class="nav" aria-label="Verwaltung">
         <button type="button" class="admin-tab" data-admin-tab="calendar" aria-selected="true">Kalendar</button>
         <button type="button" class="admin-tab" data-admin-tab="bookings" aria-selected="false">Terminbuchungen</button>
+        <button type="button" class="admin-tab" data-admin-tab="announcement" aria-selected="false">Startseiten-Hinweis</button>
       </nav>
+      </div>
     </header>
 
     <main class="admin-main">
@@ -53,6 +56,25 @@
           <button type="button" data-booking-folder="accepted" aria-pressed="false">Akzeptiert <span data-booking-count="accepted">0</span></button>
         </div>
         <div id="booking-list" class="admin-booking-list" aria-live="polite">Buchungen werden geladen …</div>
+      </section>
+
+      <section id="announcement-panel" class="section" hidden>
+        <div class="admin-calendar-toolbar">
+          <h1>Startseiten-Hinweis</h1>
+        </div>
+        <form id="announcement-form" class="announcement-form">
+          <label for="announcement-input">Mitteilung</label>
+          <textarea id="announcement-input" maxlength="1000" rows="6" placeholder="Zum Beispiel: Wegen Betriebsferien bleibt das Studio vom … bis … geschlossen."></textarea>
+          <label class="announcement-publish">
+            <input id="announcement-active" type="checkbox" />
+            Auf der Startseite anzeigen
+          </label>
+          <p id="announcement-status" role="status" aria-live="polite"></p>
+          <div class="announcement-actions">
+            <button type="submit" class="button">Speichern</button>
+            <button id="announcement-clear" type="button" class="button button-secondary">Hinweis löschen</button>
+          </div>
+        </form>
       </section>
     </main>
 

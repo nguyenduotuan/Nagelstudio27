@@ -4,30 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Nagelstudio 27 – Termin</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../styles/main.css" />
     <script type="module" src="../scripts/booking.js"></script>
   </head>
-  <body>
-    <header class="site-header">
-      <a class="brand" href="../../index.html" data-shop="name"></a>
-      <nav aria-label="Main">
-        <a href="../../index.html" data-i18n="nav.home">Startseite</a>
-        <a href="prices.html" data-i18n="nav.prices">Preisliste</a>
-        <a href="contact.html" data-i18n="nav.contact">Kontakt</a>
-      </nav>
-      <div class="languages" role="group" aria-label="Language">
-        <button type="button" data-language="de">DE</button>
-        <button type="button" data-language="en">EN</button>
-        <button type="button" data-language="vi">VI</button>
-      </div>
-    </header>
-
-    <main>
-      <section class="section narrow">
-        <h1 data-i18n="booking.title"></h1>
+  <body data-page="booking" data-root="../../">
+    <header id="site-header"></header>
+    <main class="page page-booking">
+        <h1 class="page-title" data-i18n="booking.title"></h1>
         <p class="hint" data-i18n="booking.intro"></p>
         <p class="hint" data-i18n="booking.terms"></p>
 
@@ -60,14 +43,14 @@
             <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
           </div>
 
-          <button class="button" type="submit" data-i18n="booking.submit"></button>
+          <button class="btn" type="submit" data-i18n="booking.submit"></button>
           <p id="booking-status" role="status"></p>
         </form>
 
-        <div class="actions">
-          <a class="button button-secondary" data-shop-call href="#" data-i18n="action.call"></a>
-        </div>
-      </section>
+        <p class="page-cta">
+          <a class="btn btn-outline" data-shop-call href="#" data-i18n="action.call"></a>
+        </p>
     </main>
+    <footer id="site-footer"></footer>
   </body>
 </html>

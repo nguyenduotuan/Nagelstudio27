@@ -1,83 +1,96 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Nagelstudio 27</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="src/styles/main.css" />
+    <meta name="description" content="Nagelstudio 27 – Nagelstudio in Nürnberg.">
+    <link rel="stylesheet" href="src/styles/main.css">
     <script type="module" src="src/scripts/home.js"></script>
   </head>
-  <body class="home">
-    <header class="site-header">
-      <a class="brand" href="index.html" data-shop="name"></a>
-      <nav aria-label="Main">
-        <a href="index.html" data-i18n="nav.home">Startseite</a>
-        <a href="src/pages/prices.html" data-i18n="nav.prices">Preisliste</a>
-        <a href="src/pages/contact.html" data-i18n="nav.contact">Kontakt</a>
-      </nav>
-      <div class="languages" role="group" aria-label="Language">
-        <button type="button" data-language="de">DE</button>
-        <button type="button" data-language="en">EN</button>
-        <button type="button" data-language="vi">VN</button>
-      </div>
-    </header>
-
+  <body class="home" data-page="home" data-root="">
+    <header id="site-header"></header>
     <main>
       <section class="hero">
-        <h1 data-i18n="home.heroTitle"></h1>
-        <p data-i18n="home.heroText"></p>
-        <a class="button" href="src/pages/contact.html" data-i18n="action.book"></a>
-      </section>
-
-      <button id="gallery-open" class="gallery-banner" type="button">
-        <span class="gallery-banner-title" data-i18n="gallery.title"></span>
-        <span class="gallery-banner-hint" data-i18n="gallery.open"></span>
-      </button>
-
-      <section class="section section-tinted">
-        <h2 data-i18n="reviews.title"></h2>
-        <div id="reviews-slider" class="reviews-slider" hidden>
-          <button id="reviews-previous" class="slider-button" type="button">&#8249;</button>
-          <div id="reviews" class="reviews" tabindex="0"></div>
-          <button id="reviews-next" class="slider-button" type="button">&#8250;</button>
-        </div>
-        <p id="reviews-empty" class="empty" data-i18n="reviews.empty"></p>
-      </section>
-
-      <section class="section">
-        <div class="about-row">
-          <h2 data-i18n="about.title"></h2>
-          <p class="about" data-i18n="about.text"></p>
-        </div>
-      </section>
-
-      <section class="section section-tinted">
-        <div class="contact-split">
-          <div>
-            <h2 data-i18n="nav.contact"></h2>
-            <p class="address" data-shop="address"></p>
-            <p class="hint" data-i18n="contact.callHint"></p>
-            <div class="actions">
-              <a class="button" data-shop-call href="#" data-i18n="action.call"></a>
-              <a class="button button-secondary" href="src/pages/contact.html" data-i18n="action.book"></a>
+        <div class="hero-inner">
+          <div class="hero-text">
+            <p class="hero-eyebrow" data-i18n="hero.eyebrow"></p>
+            <h1 class="hero-name" data-shop="name"></h1>
+            <p class="hero-tagline" data-i18n="home.heroTitle"></p>
+            <div class="hero-actions">
+              <a class="btn" id="hero-book" data-i18n="action.book" href="src/pages/booking.html"></a>
+              <a class="btn btn-outline" id="hero-call" data-i18n="action.call" data-shop-call href="#"></a>
             </div>
           </div>
-          <div class="contact-hours">
-            <h2 data-i18n="hours.title"></h2>
-            <ul class="hours" data-hours></ul>
+          <div class="hero-art" aria-hidden="true">
+            <span class="art-glow"></span>
+            <span class="sparkle sparkle-1"></span>
+            <span class="sparkle sparkle-2"></span>
+            <span class="sparkle sparkle-3"></span>
+            <span class="sparkle sparkle-4"></span>
+            <span class="sparkle sparkle-5"></span>
+            <span class="sparkle sparkle-6"></span>
+            <div class="nail nail-1"></div>
+            <div class="nail nail-2"></div>
+            <div class="nail nail-3"></div>
+            <div class="nail nail-4"></div>
+            <div class="nail nail-5"></div>
           </div>
+        </div>
+      </section>
+
+      <section class="section announcement" id="announcement" hidden>
+        <div class="section-inner">
+          <p class="announcement-label" data-i18n="notice.label"></p>
+          <p class="announcement-text" id="announcement-text"></p>
+        </div>
+      </section>
+
+      <section class="gallery">
+        <button class="gallery-banner" id="gallery-banner" type="button" aria-haspopup="dialog">
+          <span class="banner-bg" id="banner-bg" aria-hidden="true"></span>
+          <span class="gallery-banner-title" data-i18n="gallery.title"></span>
+        </button>
+        <div class="gallery-overlay" id="gallery-overlay" role="dialog" aria-modal="true" data-i18n-label="gallery.title" hidden>
+          <div class="overlay-card">
+            <button class="overlay-close" id="overlay-close" type="button" data-i18n-label="gallery.close">&times;</button>
+            <div class="overlay-grid" id="overlay-grid"></div>
+            <p class="overlay-empty" id="overlay-empty" data-i18n="gallery.empty" hidden></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reviews" id="reviews" hidden>
+        <div class="section-inner">
+          <h2 class="section-title" data-i18n="reviews.title"></h2>
+          <div class="slider">
+            <div class="slider-track" id="slider-track"></div>
+            <div class="slider-controls">
+              <button class="slider-btn" id="rev-prev" type="button" data-i18n-label="reviews.previous">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M15 5l-7 7 7 7"/></svg>
+              </button>
+              <button class="slider-btn" id="rev-next" type="button" data-i18n-label="reviews.next">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section about">
+        <div class="section-inner about-inner">
+          <h2 class="section-title" data-i18n="about.title"></h2>
+          <p class="about-text" data-i18n="about.text"></p>
+        </div>
+      </section>
+
+      <section class="section section-alt">
+        <div class="section-inner">
+          <h2 class="section-title" data-i18n="nav.contact"></h2>
+          <div class="contact-block" id="contact-block"></div>
         </div>
       </section>
     </main>
-
-    <dialog id="gallery-dialog" class="gallery-dialog" aria-labelledby="gallery-dialog-title">
-      <span id="gallery-dialog-title" class="visually-hidden" data-i18n="gallery.title"></span>
-      <button id="gallery-close" class="gallery-close" type="button">&times;</button>
-      <div id="gallery" class="gallery"></div>
-      <p id="gallery-empty" class="empty gallery-empty" data-i18n="gallery.empty"></p>
-    </dialog>
-  </body>
+    <footer id="site-footer"></footer>
+      </body>
 </html>
